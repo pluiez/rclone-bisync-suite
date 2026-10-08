@@ -1,0 +1,107 @@
+# ============================================================
+# rclone --filter-from bisync.filters
+# Default: sync everything, recursively exclude junk/caches/temp
+# Notes:
+# - NO inline comments (anything after pattern is treated as pattern)  :contentReference[oaicite:6]{index=6}
+# - Use "/" as separator on all OS.                                   :contentReference[oaicite:7]{index=7}
+# ============================================================
+
+# ------------------------------
+# 1) Cross-platform OS metadata files (any depth)
+# ------------------------------
+- **/.DS_Store
+- **/._*
+- **/Thumbs.db
+- **/thumbs.db
+- **/ehthumbs.db
+- **/Desktop.ini
+- **/desktop.ini
+
+# ------------------------------
+# 2) Trash / recycle / system dirs (any depth)
+#    (directory rules end with "/" to match directories)              :contentReference[oaicite:9]{index=9}
+# ------------------------------
+- **/.Trashes/
+- **/.Trash*/
+- **/$RECYCLE.BIN/
+- **/System Volume Information/
+
+# macOS filesystem service dirs (often appear on external disks)
+- **/.Spotlight-V100/
+- **/.fseventsd/
+- **/.TemporaryItems/
+- **/.AppleDouble/
+- **/.DocumentRevisions-V100/
+
+# ------------------------------
+# 3) Common temp / partial download artifacts (any depth)
+# ------------------------------
+- **/*~
+- **/.#*
+- **/#*#
+- **/*.swp
+- **/*.swo
+- **/*.tmp
+- **/*.temp
+- **/*.part
+- **/*.partial
+- **/*.crdownload
+- **/*.download
+- **/*.aria2
+- **/.fuse_hidden*
+
+# ------------------------------
+# 4) Safe-to-regenerate caches (personal-home friendly)
+# ------------------------------
+# Linux user cache
+- **/.cache/
+
+# Python bytecode cache
+- **/__pycache__/
+- **/*.pyc
+- **/*.pyo
+
+# Python packaging artifacts (usually safe to regenerate)
+- **/*.egg
+- **/*.whl
+- **/*.egg-info
+- **/*.egg-info/
+- **/*.dist-info/
+- **/*.dist-info
+
+# Jupyter checkpoints
+- **/.ipynb_checkpoints/
+
+# ------------------------------
+# 5) Platform-specific “big cache/temp” locations (any depth)
+# ------------------------------
+# macOS caches
+- **/Library/Caches/
+- **/Library/Logs/
+
+# Windows temp caches
+- **/AppData/Local/Temp/
+- **/AppData/Local/CrashDumps/
+- **/AppData/Local/Microsoft/Windows/INetCache/
+
+# ------------------------------
+# 6) Optional: developer-heavy exclusions (commented out by default)
+#    Uncomment if you don't want to sync build deps / generated outputs
+# ------------------------------
+
+# DO NOT uncomment this, a git repo should be completely excluded from bisync using cli arguemnt --exclude-if-present as best practices for working with git repo & rclone
+# - **/.git/
+
+- **/.svn/
+- **/.hg/
+- **/node_modules/
+- **/.pnpm-store/
+- **/.yarn/
+- **/.gradle/
+- **/.m2/
+- **/.venv/
+- **/venv/
+- **/dist/
+- **/build/
+- **/target/
+

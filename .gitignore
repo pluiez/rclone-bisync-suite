@@ -1,0 +1,5 @@
+# rclone bisync 运行时生成：记录 filters 文件的哈希，用于检测规则变更
+config/filters.txt.md5
+
+# Claude Code 本机权限设置
+.claude/settings.local.json
